@@ -9,7 +9,7 @@ ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 
 WORKDIR /HUST
-RUN git clone https://github.com/IRONICBo/simple-timeline.git
+RUN git clone https://github.91chi.fun/https://github.com/IRONICBo/simple-timeline.git
 
 WORKDIR /HUST/simple-timeline
 RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
