@@ -1,0 +1,4 @@
+jieba
+imageio
+wordcloud
+beautifulsoup4

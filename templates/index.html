@@ -1,0 +1,43 @@
+<!doctype html>
+
+<header>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.1/index.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.15.1/theme-chalk/index.min.css"  rel="stylesheet">
+</header>
+
+<div id="app">
+    <el-header>
+        <h1> HUST双创中心-Demo </h1>
+        </el-row>
+    </el-header>
+
+    <el-main>
+        <el-row :gutter="20">
+            <el-col :span="12">
+                <h2>词云</h2>
+                <el-image src={{url_for('static', filename="result.jpg")}} fit="fit" />
+            </el-col>
+
+            <el-col :span="12">
+                <h2>时间树</h2>
+                <el-scrollbar style="height:600px">
+                        <el-timeline>
+                        {% for item in data %}
+                        <el-timeline-item timestamp="{{item.timestamp}}" placement="top">
+                            <el-card shadow="hover">
+                                <h4>{{item.title}}</h4>
+                                <p>{{item.info}}</p>
+                            </el-card>
+                            </el-timeline-item>
+                        {% endfor %}
+                        </el-timeline>
+                </el-scrollbar>
+            </el-col>
+        </el-row>
+    </el-main>
+</div>
+
+<script>
+var vm = new Vue({el: '#app',})
+</script>
