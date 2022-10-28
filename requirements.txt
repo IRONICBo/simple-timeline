@@ -2,3 +2,4 @@ jieba
 imageio
 wordcloud
 beautifulsoup4
+flask
