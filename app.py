@@ -14,10 +14,11 @@ app = Flask(__name__)
 
 SAVE_PATH = "./static/result.jpg"
 # URL = "http://english.hust.edu.cn/info/1102/3415.htm"
-URL = "http://english.hust.edu.cn/info/1102/3410.htm"
+URL = "https://arxiv.org/"
 
 @app.route("/")
 def index():
+    # 1. get data from static file
     data = [
         {
             "timestamp": "2022/10/27",
@@ -40,13 +41,39 @@ def index():
             "info": "咿咿呀呀嗷嗷",
         }
     ]
-
+    
+    # 2. get data from local api
+    # import requests
+    # url = "http://127.0.0.1:5000/random"
+    # response = requests.get(url)
+    # data = response.json()
+    
     text = get_document_data(URL)
     generate_wordcloud(text, SAVE_PATH)
     response = make_response(send_file(SAVE_PATH))
     response.headers["Content-Disposition"] = "attachment; filename=result.jpg;"
 
     return render_template('index.html',data=data)
+
+@app.route("/random")
+def random():
+    import time
+    dataItem = {
+        "timestamp": "",
+        "title": "",
+        "info": "",
+    }
+    
+    # generate random data with dataItem structure
+    dataList = []
+    for i in range(10):
+        dataItem["timestamp"] = time.strftime("%Y/%m/%d", time.localtime())
+        dataItem["title"] = "title" + str(i)
+        dataItem["info"] = "info" + str(i)
+        
+        dataList.append(dataItem)
+    
+    return dataList
 
 def generate_wordcloud(text, save_path):
     """
